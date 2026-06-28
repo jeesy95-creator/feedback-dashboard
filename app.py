@@ -7,6 +7,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from wordcloud import WordCloud
+import matplotlib
+matplotlib.use("Agg")  # 헤드리스 서버에서 GUI 백엔드 요청 방지
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="고객 피드백 대시보드", layout="wide", page_icon="☕")
@@ -267,25 +269,28 @@ FONT_PATH = next(
     None,
 )
 
-wc = WordCloud(
-    width=1400, height=560,
-    background_color="white",
-    font_path=FONT_PATH,
-    color_func=color_func,
-    max_words=80,
-    random_state=42,
-    prefer_horizontal=0.65,
-    min_font_size=12,
-    max_font_size=120,
-    collocations=False,
-).generate_from_frequencies(word_freq)
+try:
+    wc = WordCloud(
+        width=1400, height=560,
+        background_color="white",
+        font_path=FONT_PATH,
+        color_func=color_func,
+        max_words=80,
+        random_state=42,
+        prefer_horizontal=0.65,
+        min_font_size=12,
+        max_font_size=120,
+        collocations=False,
+    ).generate_from_frequencies(word_freq)
 
-fig_wc, ax_wc = plt.subplots(figsize=(14, 5.5))
-ax_wc.imshow(wc, interpolation="bilinear")
-ax_wc.axis("off")
-plt.tight_layout(pad=0)
-st.pyplot(fig_wc)
-plt.close(fig_wc)
+    fig_wc, ax_wc = plt.subplots(figsize=(14, 5.5))
+    ax_wc.imshow(wc, interpolation="bilinear")
+    ax_wc.axis("off")
+    plt.tight_layout(pad=0)
+    st.pyplot(fig_wc)
+    plt.close(fig_wc)
+except Exception as e:
+    st.warning(f"워드클라우드 생성 실패: {e}")
 
 # 강도 범례
 st.markdown("<br>", unsafe_allow_html=True)
