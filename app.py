@@ -259,9 +259,10 @@ def color_func(word, font_size, position, orientation, random_state=None, **kwar
 
 FONT_PATH = next(
     (p for p in [
-        "/Library/Fonts/NanumGothic.ttf",
-        "/System/Library/Fonts/AppleSDGothicNeo.ttc",
-        "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+        "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",    # Linux (Streamlit Cloud)
+        "/Library/Fonts/NanumGothic.ttf",                      # macOS
+        "/System/Library/Fonts/AppleSDGothicNeo.ttc",          # macOS
+        "/System/Library/Fonts/Supplemental/AppleGothic.ttf",  # macOS
     ] if os.path.exists(p)),
     None,
 )
