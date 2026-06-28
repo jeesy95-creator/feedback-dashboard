@@ -6,10 +6,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from wordcloud import WordCloud
 import matplotlib
-matplotlib.use("Agg")  # 헤드리스 서버에서 GUI 백엔드 요청 방지
+matplotlib.use("Agg")  # 헤드리스 서버에서 GUI 백엔드 요청 방지 — wordcloud 임포트 전에 설정해야 함
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 st.set_page_config(page_title="고객 피드백 대시보드", layout="wide", page_icon="☕")
 
